@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buddhismus Stunde 1 – Siddhartas Lebensweg</title>
+<style>
+  @font-face { font-family:'Lora'; src:url('https://fonts.gstatic.com/s/lora/v35/0QI6MX1D_JOxE7fSqfN3.woff2') format('woff2'); font-weight:400 700; }
+  /* Fallback wenn offline: Georgia */
+
+  :root {
+    --ink:#1a1630; --ink-soft:#4a4560;
+    --paper:#faf8f4; --cream:#f2ede3;
+    --rust:#b84a1e; --rust-pale:#fdf0eb; --rust-lt:#fbe8e0;
+    --gold:#c8922a; --gold-pale:#fdf6e8;
+    --teal:#1a6b5c; --teal-pale:#e8f5f2;
+    --violet:#3c2e7a; --violet-lt:#ede9f8;
+    --font-d:'Lora',Georgia,serif;
+    --font-b:'Lora',Georgia,serif;
+    --font-m:'Poppins','Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#e0dbd4;font-family:var(--font-b);color:var(--ink);font-size:11pt;line-height:1.65;}
+
+  /* ── NAV TABS ── */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:#fff;border-bottom:2px solid var(--rust);
+    display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,.12);
+  }
+  .nav-btn{
+    flex:1;padding:13px 8px;border:none;background:transparent;
+    font-family:var(--font-m);font-size:10pt;font-weight:500;
+    color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;
+    transition:all .15s;
+  }
+  .nav-btn.active{color:var(--rust);border-bottom:3px solid var(--rust);background:var(--rust-pale);}
+  .nav-btn:hover:not(.active){background:var(--cream);}
+
+  /* ── SECTIONS ── */
+  .section{display:none;max-width:760px;margin:0 auto;padding:24px 20px 48px;}
+  .section.active{display:block;}
+
+  /* ── PAGE HEADER ── */
+  .pg-head{
+    background:var(--rust);color:#fff;
+    padding:14px 20px;border-radius:6px 6px 0 0;
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:0;
+  }
+  .pg-head .lbl{font-family:var(--font-m);font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+  .pg-head .badge{font-family:var(--font-d);font-size:14pt;font-weight:700;color:#FFE0D0;}
+
+  .card-wrap{background:var(--paper);border-radius:0 0 6px 6px;padding:20px 22px 24px;box-shadow:0 2px 16px rgba(0,0,0,.1);}
+
+  /* ── TITLE BLOCK ── */
+  .ab-title{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px;padding-bottom:12px;border-bottom:2.5px solid var(--rust);}
+  .ab-title h2{font-family:var(--font-d);font-size:19pt;font-weight:700;line-height:1.2;color:var(--ink);}
+  .ab-title .sub{font-size:10pt;color:var(--ink-soft);font-style:italic;margin-top:4px;}
+
+  /* ── SECTION LABEL ── */
+  .slabel{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-m);font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:10px;font-weight:500;}
+  .slabel::before{content:'';width:16px;height:2px;background:var(--rust);flex-shrink:0;}
+
+  /* ── BOXES ── */
+  .box{border-radius:4px;padding:13px 16px;margin-bottom:14px;}
+  .box-rust{background:var(--rust-pale);border-left:4px solid var(--rust);}
+  .box-teal{background:var(--teal-pale);border-left:4px solid var(--teal);}
+  .box-gold{background:var(--gold-pale);border-left:4px solid var(--gold);}
+  .box-violet{background:var(--violet-lt);border-left:4px solid var(--violet);}
+  .box .bt{font-family:var(--font-d);font-size:11pt;font-weight:700;margin-bottom:6px;}
+  .box-rust .bt{color:var(--rust);}
+  .box-teal .bt{color:var(--teal);}
+  .box-gold .bt{color:var(--gold);}
+  .box-violet .bt{color:var(--violet);}
+
+  /* ── STATION CARDS ── */
+  .stations{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+  .sc{border-radius:5px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.08);}
+  .sc-head{padding:9px 13px 8px;display:flex;align-items:center;gap:9px;}
+  .sc-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-m);font-size:9pt;font-weight:700;color:#fff;flex-shrink:0;}
+  .sc-title{font-family:var(--font-d);font-size:10.5pt;font-weight:700;color:#fff;}
+  .sc-body{padding:10px 13px 12px;font-size:10pt;line-height:1.6;}
+
+  /* ── ANSWER AREA ── */
+  .answer-area{width:100%;min-height:60px;border:1.5px solid #c0b8b0;border-radius:4px;background:rgba(255,255,255,.7);padding:8px 10px;font-family:var(--font-b);font-size:10.5pt;color:var(--ink);resize:vertical;margin:8px 0 14px;}
+  .answer-line{width:100%;border:none;border-bottom:1.5px solid #c0b8b0;height:32px;display:block;margin:6px 0;background:transparent;padding:4px 2px;font-family:var(--font-b);font-size:10.5pt;color:var(--ink);outline:none;}
+  .answer-line:focus{border-bottom-color:var(--rust);}
+
+  /* ── TASK LIST ── */
+  .tasks{list-style:none;margin-bottom:14px;}
+  .tasks li{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;}
+  .tnum{flex-shrink:0;width:24px;height:24px;background:var(--rust);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-m);font-size:9pt;font-weight:500;margin-top:2px;}
+  .ttext{font-size:11pt;flex:1;}
+
+  /* ── JOURNEY BAR ── */
+  .journey{display:flex;align-items:center;gap:0;margin:16px 0;background:var(--cream);border-radius:6px;padding:12px 10px;overflow-x:auto;}
+  .jstep{flex:1;text-align:center;position:relative;min-width:70px;}
+  .jstep::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--rust);font-size:16pt;font-weight:700;}
+  .jstep:last-child::after{display:none;}
+  .jdot{width:40px;height:40px;border-radius:50%;margin:0 auto 7px;display:flex;align-items:center;justify-content:center;font-size:18pt;}
+  .jlabel{font-family:var(--font-m);font-size:7.5pt;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);line-height:1.3;}
+
+  /* ── LETTER AREA ── */
+  .letter-box{background:var(--cream);border:1px solid #d4c9bc;border-radius:6px;padding:18px 20px;}
+  .letter-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;border-bottom:1px dashed #c0b8b0;padding-bottom:10px;}
+  .letter-textarea{width:100%;min-height:260px;border:none;background:transparent;font-family:var(--font-b);font-size:11pt;line-height:2;color:var(--ink);resize:none;outline:none;background-image:repeating-linear-gradient(transparent,transparent 31px,#d0c8c0 31px,#d0c8c0 32px);background-size:100% 32px;background-position:0 8px;}
+
+  /* ══════════════════════════════
+     INTERAKTIVE TIMELINE
+  ══════════════════════════════ */
+  #section-timeline .pg-head{background:var(--violet);}
+  #section-timeline .pg-head .badge{color:#E0D8FF;}
+
+  .tl-intro{font-size:11pt;color:var(--ink-soft);margin-bottom:20px;font-style:italic;}
+
+  .tl-area{
+    border:2px dashed #c0b8b0;border-radius:6px;
+    min-height:80px;padding:12px;margin-bottom:20px;
+    background:rgba(255,255,255,.5);
+    transition:background .15s, border-color .15s;
+  }
+  .tl-area.drag-over{background:var(--violet-lt);border-color:var(--violet);}
+  .tl-empty{text-align:center;font-size:11pt;color:#bbb;padding:16px 0;font-style:italic;}
+
+  .pool-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+
+  .tl-card{
+    display:flex;align-items:center;gap:12px;
+    padding:11px 14px;border-radius:5px;
+    border:1.5px solid rgba(0,0,0,.08);
+    cursor:grab;user-select:none;
+    transition:transform .12s,opacity .12s,box-shadow .12s;
+    box-shadow:0 1px 4px rgba(0,0,0,.07);
+  }
+  .tl-card:active{cursor:grabbing;transform:scale(1.02);box-shadow:0 4px 16px rgba(0,0,0,.15);}
+  .tl-card.dragging{opacity:.4;}
+  .tl-card .card-icon{font-size:22pt;flex-shrink:0;}
+  .tl-card .card-title{font-family:var(--font-d);font-size:11pt;font-weight:700;color:var(--ink);margin-bottom:3px;}
+  .tl-card .card-text{font-size:9.5pt;color:var(--ink-soft);line-height:1.5;}
+  .tl-card .drag-handle{margin-left:auto;color:#ccc;font-size:16pt;flex-shrink:0;}
+
+  /* numbered in drop zone */
+  .tl-area .tl-card{position:relative;}
+  .slot-num{
+    position:absolute;left:-14px;top:50%;transform:translateY(-50%);
+    width:26px;height:26px;border-radius:50%;
+    background:var(--violet);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-m);font-size:9pt;font-weight:700;
+    box-shadow:0 1px 4px rgba(0,0,0,.2);
+  }
+
+  .tl-btns{display:flex;gap:10px;margin-bottom:16px;}
+  .tl-btn{
+    flex:1;padding:11px 0;border-radius:5px;border:1.5px solid var(--violet);
+    background:transparent;color:var(--violet);font-family:var(--font-m);font-size:10.5pt;font-weight:500;cursor:pointer;transition:all .15s;
+  }
+  .tl-btn:hover{background:var(--violet);color:#fff;}
+  .tl-btn-sec{border-color:#c0b8b0;color:var(--ink-soft);}
+  .tl-btn-sec:hover{background:var(--cream);color:var(--ink);}
+
+  .tl-feedback{
+    border-radius:5px;padding:12px 16px;font-size:11pt;display:none;
+    border:1.5px solid;margin-bottom:12px;
+  }
+  .tl-feedback.correct{background:var(--teal-pale);border-color:var(--teal);color:var(--teal);}
+  .tl-feedback.wrong{background:var(--rust-pale);border-color:var(--rust);color:var(--rust);}
+  .tl-feedback.info{background:var(--violet-lt);border-color:var(--violet);color:var(--violet);}
+
+  /* touch support */
+  @media (hover:none){ .tl-card{cursor:default;} }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('ab1')">📜 AB 1 – Lebensweg</button>
+  <button class="nav-btn" onclick="showSection('ab2')">✉️ AB 2 – Brief</button>
+  <button class="nav-btn" onclick="showSection('timeline')">🎯 Interaktiv – Timeline</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     AB 1
+══════════════════════════════════════ -->
+<div id="section-ab1" class="section active">
+  <div class="pg-head">
+    <span class="lbl">Ev. Religion · Meixner</span>
+    <span class="badge">AB 1 – Siddhartas Lebensweg</span>
+  </div>
+  <div class="card-wrap">
+
+    <div class="ab-title">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <rect x="23" y="36" width="6" height="12" fill="#b84a1e" rx="2"/>
+        <ellipse cx="26" cy="22" rx="16" ry="14" fill="#fdf0eb" stroke="#b84a1e" stroke-width="1.5"/>
+        <ellipse cx="18" cy="28" rx="8" ry="7" fill="#fdf0eb" stroke="#b84a1e" stroke-width="1.2"/>
+        <ellipse cx="34" cy="28" rx="8" ry="7" fill="#fdf0eb" stroke="#b84a1e" stroke-width="1.2"/>
+        <circle cx="26" cy="20" r="5" fill="#c8922a" opacity=".7"/>
+        <circle cx="26" cy="20" r="2.5" fill="#b84a1e"/>
+      </svg>
+      <div>
+        <h2>Siddhartas Lebensweg</h2>
+        <div class="sub">Lies die fünf Stationskarten und bearbeite die Aufgaben unten</div>
+      </div>
+    </div>
+
+    <div class="stations">
+      <div class="sc">
+        <div class="sc-head" style="background:#b84a1e;">
+          <div class="sc-num">1</div><div class="sc-title">Prinz im Palast</div>
+        </div>
+        <div class="sc-body" style="background:#fdf0eb;">
+          Ca. <strong>560 v. Chr.</strong> wird Siddharta Gautama als Sohn eines Königs in Nordindien geboren. Ein Weiser prophezeit: Er wird entweder ein mächtiger König – oder ein großer spiritueller Lehrer. Sein Vater schützt ihn vor allem Leid der Welt. Siddharta wächst in absolutem Luxus auf, heiratet und bekommt einen Sohn.
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head" style="background:#8f3010;">
+          <div class="sc-num">2</div><div class="sc-title">Die Vier Begegnungen</div>
+        </div>
+        <div class="sc-body" style="background:#fbe8e0;">
+          Mit 29 Jahren verlässt Siddharta heimlich den Palast. Er begegnet einem alten Mann, einem Kranken, einem Toten – und einem ruhigen, heiteren Mönch ohne Besitz. Die ersten drei erschüttern ihn. Der Mönch zeigt ihm: Es gibt einen Weg jenseits des Leidens.
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head" style="background:#c8922a;">
+          <div class="sc-num">3</div><div class="sc-title">Die Grosse Entsagung</div>
+        </div>
+        <div class="sc-body" style="background:#fdf6e8;">
+          Siddharta verlässt Familie und Reichtum. Er studiert bei Brahmanen-Lehrern, schließt sich Asketen an: extremes Fasten, Selbstkasteiung. Jahre vergehen. Sein Körper zerfällt – aber Erleuchtung bleibt aus. Erkenntnis: Weder Luxus noch extremer Verzicht führen zum Ziel – der <strong>Mittlere Weg</strong>.
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head" style="background:#1a6b5c;">
+          <div class="sc-num">4</div><div class="sc-title">Die Erleuchtung</div>
+        </div>
+        <div class="sc-body" style="background:#e8f5f2;">
+          Mit ca. <strong>35 Jahren</strong> setzt sich Siddharta unter einen Feigenbaum – den <em>Bodhi-Baum</em> in Bodh Gaya, Indien. Er meditiert, bis er die volle Erkenntnis erlangt. Von nun an heißt er <strong>Buddha</strong> – der Erwachte.
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" style="margin-bottom:16px;">
+      <div class="sc-head" style="background:#3c2e7a;">
+        <div class="sc-num">5</div><div class="sc-title">Der lehrende Buddha</div>
+      </div>
+      <div class="sc-body" style="background:#ede9f8;">
+        Buddha entscheidet sich zu lehren statt ins Nirvana zurückzuziehen. Seine erste Lehrrede hält er im Hirschpark bei Sarnath – er verkündet die <strong>Vier Edlen Wahrheiten</strong>. Er gründet den <em>Sangha</em> (Gemeinschaft der Mönche) und lehrt bis zu seinem Tod mit ca. 80 Jahren.
+      </div>
+    </div>
+
+    <div class="slabel">Aufgaben</div>
+    <ul class="tasks">
+      <li>
+        <div class="tnum">1</div>
+        <div class="ttext">Warum verlässt Siddharta den Palast wirklich? Was reicht ihm nicht mehr aus?
+          <input class="answer-line" type="text" placeholder="Deine Antwort…">
+          <input class="answer-line" type="text" placeholder="">
+        </div>
+      </li>
+      <li>
+        <div class="tnum">2</div>
+        <div class="ttext">Was meint Siddharta mit dem <strong>Mittleren Weg</strong>? Erkläre mit eigenen Worten.
+          <input class="answer-line" type="text" placeholder="Deine Antwort…">
+          <input class="answer-line" type="text" placeholder="">
+        </div>
+      </li>
+      <li>
+        <div class="tnum">3</div>
+        <div class="ttext">Was bedeutet der Name <strong>Buddha</strong> – und warum ist das kein Eigenname?
+          <input class="answer-line" type="text" placeholder="Deine Antwort…">
+        </div>
+      </li>
+    </ul>
+
+    <div class="box box-gold">
+      <div class="bt">✦ Zum Nachdenken</div>
+      <p style="font-size:11pt;margin-bottom:10px;">Siddharta lässt Frau, Kind und Reichtum zurück, um die Wahrheit zu suchen. Bewunderst du das – oder findest du es egoistisch? Notiere deine erste Reaktion:</p>
+      <textarea class="answer-area" placeholder="Schreibe hier deine Gedanken…" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     AB 2
+══════════════════════════════════════ -->
+<div id="section-ab2" class="section">
+  <div class="pg-head">
+    <span class="lbl">Ev. Religion · Meixner</span>
+    <span class="badge">AB 2 – Brief an Siddharta</span>
+  </div>
+  <div class="card-wrap">
+
+    <div class="ab-title">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <rect x="6" y="14" width="40" height="28" rx="3" fill="#fdf0eb" stroke="#b84a1e" stroke-width="1.5"/>
+        <path d="M6 14 L26 30 L46 14" stroke="#b84a1e" stroke-width="1.5" fill="none"/>
+        <path d="M6 42 L20 28" stroke="#b84a1e" stroke-width="1" opacity=".4"/>
+        <path d="M46 42 L32 28" stroke="#b84a1e" stroke-width="1" opacity=".4"/>
+        <path d="M34 8 Q44 4 42 16 Q36 14 34 8Z" fill="#c8922a" opacity=".8"/>
+        <line x1="38" y1="10" x2="28" y2="28" stroke="#c8922a" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <h2>Brief an Siddharta</h2>
+        <div class="sub">Was würdest du ihm sagen – nach allem, was du über ihn weißt?</div>
+      </div>
+    </div>
+
+    <div class="box box-rust">
+      <div class="bt">Der Auftrag</div>
+      <p style="font-size:11pt;">Schreibe einen Brief an Siddharta – direkt nach dem Moment, als er den Palast verlässt. Du kannst ihn bewundern, in Frage stellen, anfeuern – oder ihm eine Frage stellen. Schreibe <strong>4–6 Sätze</strong>. Es gibt keine falsche Antwort.</p>
+    </div>
+
+    <div class="journey">
+      <div class="jstep">
+        <div class="jdot" style="background:#fdf0eb;border:2px solid #b84a1e;">👑</div>
+        <div class="jlabel">Prinz</div>
+      </div>
+      <div class="jstep">
+        <div class="jdot" style="background:#fbe8e0;border:2px solid #8f3010;">👁</div>
+        <div class="jlabel">4 Begeg&shy;nungen</div>
+      </div>
+      <div class="jstep">
+        <div class="jdot" style="background:#fdf6e8;border:2px solid #c8922a;">🚶</div>
+        <div class="jlabel">Die Suche</div>
+      </div>
+      <div class="jstep">
+        <div class="jdot" style="background:#e8f5f2;border:2px solid #1a6b5c;">🌳</div>
+        <div class="jlabel">Erleuchtung</div>
+      </div>
+      <div class="jstep">
+        <div class="jdot" style="background:#ede9f8;border:2px solid #3c2e7a;">📖</div>
+        <div class="jlabel">Buddha</div>
+      </div>
+    </div>
+
+    <div class="letter-box">
+      <div class="letter-header">
+        <span style="font-family:var(--font-m);font-size:9pt;color:var(--rust);text-transform:uppercase;letter-spacing:.1em;font-weight:500;">Lieber Siddharta,</span>
+        <span style="font-family:var(--font-m);font-size:8.5pt;color:#aaa;">Ev. Religion · Meixner</span>
+      </div>
+      <textarea class="letter-textarea" placeholder="Schreibe deinen Brief hier…" rows="10"></textarea>
+      <div style="text-align:right;margin-top:12px;font-family:var(--font-m);font-size:9pt;color:#aaa;">Mit freundlichen Grüßen, ____________________</div>
+    </div>
+
+    <div class="box box-violet" style="margin-top:16px;">
+      <div class="bt">✦ Zusatz – wenn du Zeit hast</div>
+      <p style="font-size:11pt;margin-bottom:10px;">Stell dir vor, Siddharta antwortet dir. Was würde er schreiben? 2–3 Sätze aus seiner Perspektive:</p>
+      <textarea class="answer-area" placeholder="Siddhartas Antwort…" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     INTERAKTIVE TIMELINE
+══════════════════════════════════════ -->
+<div id="section-timeline" class="section">
+  <div class="pg-head" style="background:var(--violet);">
+    <span class="lbl">Ev. Religion · Meixner</span>
+    <span class="badge" style="color:#E0D8FF;">🎯 Interaktiv – Lebensstationen sortieren</span>
+  </div>
+  <div class="card-wrap">
+
+    <div class="ab-title" style="border-bottom-color:var(--violet);">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <rect x="8" y="8" width="36" height="36" rx="4" fill="#ede9f8" stroke="#3c2e7a" stroke-width="1.5"/>
+        <line x1="16" y1="20" x2="36" y2="20" stroke="#3c2e7a" stroke-width="2" stroke-linecap="round"/>
+        <line x1="16" y1="28" x2="36" y2="28" stroke="#3c2e7a" stroke-width="2" stroke-linecap="round"/>
+        <line x1="16" y1="36" x2="28" y2="36" stroke="#3c2e7a" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="38" cy="38" r="10" fill="#3c2e7a"/>
+        <text x="38" y="43" text-anchor="middle" font-size="13" fill="white" font-family="serif">↕</text>
+      </svg>
+      <div>
+        <h2>Lebensstationen sortieren</h2>
+        <div class="sub">Ziehe die Karten in die richtige chronologische Reihenfolge</div>
+      </div>
+    </div>
+
+    <p class="tl-intro">Die Karten im unteren Bereich sind durchgemischt. Ziehe sie in den blauen Bereich – in der richtigen Reihenfolge von oben (= zuerst) nach unten (= zuletzt).</p>
+
+    <div class="slabel" style="color:var(--violet);">Deine Reihenfolge</div>
+    <div id="drop-zone" class="tl-area">
+      <div class="tl-empty" id="drop-hint">← Ziehe Karten hierher</div>
+    </div>
+
+    <div class="slabel" style="color:var(--ink-soft);">Karten zum Sortieren</div>
+    <div id="pool" class="pool-grid"></div>
+
+    <div class="tl-btns">
+      <button class="tl-btn" onclick="checkTL()">Reihenfolge prüfen ✓</button>
+      <button class="tl-btn tl-btn-sec" onclick="showSolutionTL()">Lösung anzeigen</button>
+      <button class="tl-btn tl-btn-sec" onclick="resetTL()">Neu mischen ↺</button>
+    </div>
+
+    <div id="tl-feedback" class="tl-feedback"></div>
+
+  </div>
+</div>
+
+<script>
+// ── TAB NAVIGATION ──
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── TIMELINE DATA ──
+const STATIONS = [
+  {id:1,icon:'👑',title:'Prinz im Palast',text:'Als Königssohn geboren, wächst er in absolutem Luxus auf – abgeschirmt vom Leid der Welt.',bg:'#fdf0eb',border:'#b84a1e'},
+  {id:2,icon:'👁',title:'Die Vier Begegnungen',text:'Er begegnet Alter, Krankheit, Tod – und einem heiteren Mönch. Die Welt des Leidens öffnet sich.',bg:'#fbe8e0',border:'#8f3010'},
+  {id:3,icon:'🚶',title:'Die Grosse Entsagung',text:'Mit 29 Jahren verlässt er heimlich Familie und Reichtum, um die Wahrheit zu suchen.',bg:'#fdf6e8',border:'#c8922a'},
+  {id:4,icon:'🔥',title:'Die Askese',text:'Extremes Fasten – aber keine Erleuchtung. Erkenntnis: der Mittlere Weg, weder Luxus noch Entbehrung.',bg:'#f5f5f5',border:'#888'},
+  {id:5,icon:'🌳',title:'Die Erleuchtung',text:'Unter dem Bodhi-Baum erlangt er mit ca. 35 Jahren volle Erkenntnis. Er wird zum Buddha – dem Erwachten.',bg:'#e8f5f2',border:'#1a6b5c'},
+  {id:6,icon:'📖',title:'Der lehrende Buddha',text:'Er lehrt die Vier Edlen Wahrheiten, gründet den Sangha und unterrichtet bis zu seinem Tod.',bg:'#ede9f8',border:'#3c2e7a'},
+];
+const CORRECT = [1,2,3,4,5,6];
+let poolIds=[], dropIds=[], dragId=null, dragFrom=null;
+
+function cardEl(s, inDrop, pos) {
+  const d = document.createElement('div');
+  d.className='tl-card';
+  d.dataset.id=s.id;
+  d.dataset.zone=inDrop?'drop':'pool';
+  d.draggable=true;
+  d.style.background=s.bg;
+  d.style.borderColor=s.border;
+  if(inDrop){
+    const num=document.createElement('div');
+    num.className='slot-num'; num.textContent=pos+1;
+    d.style.marginLeft='18px';
+    d.appendChild(num);
+  }
+  d.innerHTML+= `<span class="card-icon">${s.icon}</span>
+    <div style="flex:1"><div class="card-title">${s.title}</div><div class="card-text">${s.text}</div></div>
+    <span class="drag-handle">⠿</span>`;
+  d.addEventListener('dragstart', e=>{ dragId=s.id; dragFrom=d.dataset.zone; setTimeout(()=>d.classList.add('dragging'),0); });
+  d.addEventListener('dragend', ()=>{ d.classList.remove('dragging'); });
+  // Touch support
+  d.addEventListener('touchstart', touchStart, {passive:true});
+  d.addEventListener('touchmove', touchMove, {passive:false});
+  d.addEventListener('touchend', touchEnd);
+  return d;
+}
+
+function render() {
+  const pool=document.getElementById('pool');
+  const drop=document.getElementById('drop-zone');
+  pool.innerHTML=''; drop.innerHTML='';
+  if(dropIds.length===0){
+    const hint=document.createElement('div'); hint.className='tl-empty'; hint.textContent='← Ziehe Karten hierher';
+    drop.appendChild(hint);
+  }
+  dropIds.forEach((id,i)=>{ drop.appendChild(cardEl(STATIONS.find(s=>s.id===id),true,i)); });
+  poolIds.forEach(id=>{ pool.appendChild(cardEl(STATIONS.find(s=>s.id===id),false,0)); });
+  addDZ(drop,'drop'); addDZ(pool,'pool');
+}
+
+function addDZ(el, zone) {
+  el.addEventListener('dragover',e=>{ e.preventDefault(); el.classList.add('drag-over'); });
+  el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
+  el.addEventListener('drop',e=>{ e.preventDefault(); el.classList.remove('drag-over'); doMove(zone); });
+}
+
+function doMove(targetZone) {
+  if(!dragId) return;
+  if(dragFrom==='pool') poolIds=poolIds.filter(id=>id!==dragId);
+  else dropIds=dropIds.filter(id=>id!==dragId);
+  if(targetZone==='drop'){ if(!dropIds.includes(dragId)) dropIds.push(dragId); }
+  else { if(!poolIds.includes(dragId)) poolIds.push(dragId); }
+  dragId=null; dragFrom=null;
+  hideFeedback(); render();
+}
+
+// ── TOUCH DRAG ──
+let touchCard=null, touchClone=null, touchZone=null;
+function touchStart(e) {
+  touchCard=e.currentTarget;
+  dragId=parseInt(touchCard.dataset.id);
+  dragFrom=touchCard.dataset.zone;
+  const r=touchCard.getBoundingClientRect();
+  touchClone=touchCard.cloneNode(true);
+  touchClone.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;opacity:.85;z-index:999;pointer-events:none;transform:scale(1.03);transition:none;`;
+  document.body.appendChild(touchClone);
+}
+function touchMove(e) {
+  e.preventDefault();
+  const t=e.touches[0];
+  if(touchClone){ touchClone.style.left=(t.clientX-touchClone.offsetWidth/2)+'px'; touchClone.style.top=(t.clientY-30)+'px'; }
+  const el=document.elementFromPoint(t.clientX,t.clientY);
+  touchZone=el?.closest('#drop-zone')?'drop':el?.closest('#pool')?'pool':null;
+  ['drop-zone','pool'].forEach(id=>document.getElementById(id)?.classList.remove('drag-over'));
+  if(touchZone) document.getElementById(touchZone==='drop'?'drop-zone':'pool')?.classList.add('drag-over');
+}
+function touchEnd(e) {
+  if(touchClone){ document.body.removeChild(touchClone); touchClone=null; }
+  ['drop-zone','pool'].forEach(id=>document.getElementById(id)?.classList.remove('drag-over'));
+  if(touchZone) doMove(touchZone);
+  else { dragId=null; dragFrom=null; }
+  touchZone=null;
+}
+
+function checkTL() {
+  if(dropIds.length<6){ showFB('info','Ziehe erst alle 6 Karten in die Zeitleiste!'); return; }
+  if(JSON.stringify(dropIds)===JSON.stringify(CORRECT)){
+    showFB('correct','🎉 Perfekt! Du hast alle 6 Stationen richtig eingeordnet.');
+  } else {
+    const wrong=dropIds.map((id,i)=>id!==CORRECT[i]?STATIONS.find(s=>s.id===id).title:null).filter(Boolean);
+    showFB('wrong',`Noch nicht ganz – schau nochmal: ${wrong.slice(0,2).join(', ')}${wrong.length>2?' …':''}`);
+  }
+}
+function showSolutionTL() {
+  dropIds=[...CORRECT]; poolIds=[]; hideFeedback(); render();
+  showFB('info','Das ist die richtige Reihenfolge. Vergleiche mit deiner Antwort!');
+}
+function resetTL() {
+  poolIds=shuffle(STATIONS.map(s=>s.id)); dropIds=[]; hideFeedback(); render();
+}
+function showFB(type,msg){ const fb=document.getElementById('tl-feedback'); fb.className='tl-feedback '+type; fb.textContent=msg; fb.style.display='block'; }
+function hideFeedback(){ document.getElementById('tl-feedback').style.display='none'; }
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+resetTL();
+</script>
+</body>
+</html>
